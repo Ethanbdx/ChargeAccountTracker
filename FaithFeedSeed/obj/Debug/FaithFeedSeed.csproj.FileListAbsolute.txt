@@ -1,0 +1,11 @@
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\FaithFeedSeed.dll
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\FaithFeedSeed.pdb
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Debug\FaithFeedSeed.csprojAssemblyReference.cache
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Debug\FaithFeedSeed.csproj.CoreCompileInputs.cache
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Debug\FaithFeedSeed.dll
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Debug\FaithFeedSeed.pdb
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\ChargeAccountInvoices.mdf
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\ChargeAccountInvoices_log.ldf
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\Dapper.dll
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\Dapper.xml
+C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Debug\FaithFeedSeed.csproj.CopyComplete
