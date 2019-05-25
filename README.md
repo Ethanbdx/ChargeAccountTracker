@@ -1,6 +1,14 @@
 # ChargeAccountTracker
 A charge account tracking program for a local business "Faith Feed Seed LLC"
 
-REQUIRES SQL SERVER 2016 LOCALDB
+**Prequities: SQL LOCALDB**
 
-This program tracks charge account information, invoices, and has an ability to print invoices based on the business' needs.
+This program was design to assist a business keep track of their charge accounts.
+Features:
+<ul>
+  <li>Ability to create/edit charge account information</li>
+  <li>Add charges to accounts</li>
+  <li>Print monthly invoices to send to customers</li>
+</ul>
+  
+This program enabled the business to save plenty of time and money as they were using excel spreadsheets to manually track all of thier accounts. Additionally, the using the database allows for records to be more accurate and constantly backed-up.
