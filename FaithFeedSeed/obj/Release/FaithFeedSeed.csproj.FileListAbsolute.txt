@@ -9,3 +9,14 @@ C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Release\FaithFeed
 C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Release\FaithFeedSeed.dll
 C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Release\FaithFeedSeed.pdb
 C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Release\FaithFeedSeed.csprojAssemblyReference.cache
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Release\ChargeAccountInvoices.mdf
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Release\ChargeAccountInvoices_log.ldf
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Release\FaithFeedSeed.dll
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Release\FaithFeedSeed.pdb
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Release\Dapper.dll
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Release\Dapper.xml
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Release\FaithFeedSeed.csprojAssemblyReference.cache
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Release\FaithFeedSeed.csproj.CoreCompileInputs.cache
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Release\FaithFeedSeed.csproj.CopyComplete
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Release\FaithFeedSeed.dll
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Release\FaithFeedSeed.pdb

@@ -10,16 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace FaithFeedChargeAccountUI
 {
 
-    public partial class ChargeAccountUI : Form
+    public partial class ChargeAccountUI : MaterialForm
     {
         private List<ChargeAccountModel> ChargeAccountList = new List<ChargeAccountModel>();
         public ChargeAccountUI()
         {   
-            InitializeOtherComponent();
             InitializeComponent();
             WireUpDropdown();
         }
@@ -47,16 +48,14 @@ namespace FaithFeedChargeAccountUI
                     lblDatePaid.Visible = true;
                     txtPaymentType.Visible = true;
                     dtpPaidDate.Visible = true;
-                    CreateInvoiceBtn.Location = (new Point (981, 227));
                 }
                 else if(InvoicesDataGrid.Rows[e.RowIndex].Cells[4].Value.ToString() == "False")
                 {
                     InvoiceStatusValue.SelectedIndex = 0;
                     dtpPaidDate.Text = null;
                     txtPaymentType.Text = null;
-                    CreateInvoiceBtn.Location = (new Point(981, 157));
                 }
-                CreateInvoiceBtn.Text = "Update";
+                CreateInvoiceBtn.Text = "Update Invoice";
                 var select = "SELECT InvoiceId from dbo.Invoices WHERE InvoiceNumber =" + Int32.Parse(InvoiceNumberValue.Text) + "";
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.CnnString("ChargeAccountInvoices")))
                 {
@@ -110,13 +109,20 @@ namespace FaithFeedChargeAccountUI
         //Creating an invoice from the selectedID. 
         public void btnPrintInvoice_Click(object sender, EventArgs e)
         {
-            InvoiceUI form = new InvoiceUI(selectedId);
-            form.Show();
+            if (selectedId == 0)
+            {
+                MessageBox.Show("You must select an account first.");
+            }
+            else
+            {
+                InvoiceUI form = new InvoiceUI(selectedId);
+                form.Show();
+            }
         }
         //Valdiation for new invoices.
         private void CreateInvoiceBtn_Click(object sender, EventArgs e)
         {
-            if(CreateInvoiceBtn.Text == "Create")
+            if(CreateInvoiceBtn.Text == "Create Invoice")
             {
                 if (ValidateInvoice())
                 {
@@ -377,6 +383,7 @@ namespace FaithFeedChargeAccountUI
             InvoicesDataGrid.Columns[4].Width = 100;
             InvoicesDataGrid.Columns[5].Width = 160;
             InvoicesDataGrid.Columns[6].Width = 130;
+            InvoicesDataGrid.Columns["Invoice Amount"].DefaultCellStyle.Format = "C";
         }
         
         private int selectedInvoice;
@@ -397,7 +404,7 @@ namespace FaithFeedChargeAccountUI
             InvoiceAmountValue.Text = "";
             InvoiceDatePicker.ResetText();
             InvoiceStatusValue.SelectedIndex = -1;
-            CreateInvoiceBtn.Text = "Create";
+            CreateInvoiceBtn.Text = "Create Invoice";
         }
 
         #endregion
@@ -411,7 +418,6 @@ namespace FaithFeedChargeAccountUI
                 txtPaymentType.Visible = true;
                 dtpPaidDate.Text = null;
                 dtpPaidDate.Visible = true;
-                CreateInvoiceBtn.Location = (new Point(981, 227));
             } else
             {
                 dtpPaidDate.Text = null;
@@ -420,7 +426,6 @@ namespace FaithFeedChargeAccountUI
                 lblDatePaid.Visible = false;
                 txtPaymentType.Visible = false;
                 dtpPaidDate.Visible = false;
-                CreateInvoiceBtn.Location = (new Point(981, 157));
             }
         }
     }

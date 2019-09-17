@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FaithFeedChargeAccountUI.exe" size="151000">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FaithFeedChargeAccountUI.exe" size="150488">
       <assemblyIdentity name="FaithFeedChargeAccountUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NBwlCdRUdhzV8UntjMTKKu9ws47hm2C6rBDLuXpKmig=</dsig:DigestValue>
+        <dsig:DigestValue>LHb+VlkZP2ddE9DJsymubCWQi+O8GxZQS4/Y1e0FJrM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -133,7 +133,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FMjS4kBpIXJ8ivlON20wCdAEaceh/tdIZokI7nMiXFE=</dsig:DigestValue>
+        <dsig:DigestValue>noRrsO0r+zBhy4PuxGfKNzVfoqyOxW8PP/YDdvbAWUI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MaterialSkin.dll" size="587776">
+      <assemblyIdentity name="MaterialSkin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>uYed8V6CxS6RZscfexd8V71MgomCGmWp0/Uiiz9ga04=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
