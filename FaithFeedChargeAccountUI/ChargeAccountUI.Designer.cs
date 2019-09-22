@@ -51,9 +51,12 @@
             this.LastNameValue = new System.Windows.Forms.TextBox();
             this.FirstNameValue = new System.Windows.Forms.TextBox();
             this.ChargeAccountGroupBox = new System.Windows.Forms.GroupBox();
+            this.Savebtn = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Createbtn = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Editbtn = new MaterialSkin.Controls.MaterialRaisedButton();
             this.InvoicesGroupBox = new System.Windows.Forms.GroupBox();
             this.CreateInvoiceBtn = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.dtpPaidDate = new System.Windows.Forms.TextBox();
+            this.btnPrintInvoice = new MaterialSkin.Controls.MaterialRaisedButton();
             this.lblDatePaid = new System.Windows.Forms.Label();
             this.txtPaymentType = new System.Windows.Forms.TextBox();
             this.lblPaymentType = new System.Windows.Forms.Label();
@@ -69,11 +72,8 @@
             this.Button = new System.Windows.Forms.DataGridViewButtonColumn();
             this.SelectedChargeAccount = new System.Windows.Forms.ComboBox();
             this.txtSelectId = new System.Windows.Forms.Label();
-            this.btnPrintInvoice = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.Editbtn = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.Createbtn = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.Savebtn = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.dtpPaidDate = new System.Windows.Forms.DateTimePicker();
             this.ChargeAccountGroupBox.SuspendLayout();
             this.InvoicesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InvoicesDataGrid)).BeginInit();
@@ -290,11 +290,50 @@
             this.ChargeAccountGroupBox.Text = "Charge Account Details";
             this.ChargeAccountGroupBox.Visible = false;
             // 
+            // Savebtn
+            // 
+            this.Savebtn.Depth = 0;
+            this.Savebtn.Location = new System.Drawing.Point(1036, 93);
+            this.Savebtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Savebtn.Name = "Savebtn";
+            this.Savebtn.Primary = true;
+            this.Savebtn.Size = new System.Drawing.Size(96, 55);
+            this.Savebtn.TabIndex = 23;
+            this.Savebtn.Text = "Save";
+            this.Savebtn.UseVisualStyleBackColor = true;
+            this.Savebtn.Click += new System.EventHandler(this.Savebtn_Click);
+            // 
+            // Createbtn
+            // 
+            this.Createbtn.Depth = 0;
+            this.Createbtn.Location = new System.Drawing.Point(1036, 93);
+            this.Createbtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Createbtn.Name = "Createbtn";
+            this.Createbtn.Primary = true;
+            this.Createbtn.Size = new System.Drawing.Size(96, 55);
+            this.Createbtn.TabIndex = 22;
+            this.Createbtn.Text = "Create";
+            this.Createbtn.UseVisualStyleBackColor = true;
+            this.Createbtn.Click += new System.EventHandler(this.Createbtn_Click);
+            // 
+            // Editbtn
+            // 
+            this.Editbtn.Depth = 0;
+            this.Editbtn.Location = new System.Drawing.Point(1036, 32);
+            this.Editbtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Editbtn.Name = "Editbtn";
+            this.Editbtn.Primary = true;
+            this.Editbtn.Size = new System.Drawing.Size(96, 55);
+            this.Editbtn.TabIndex = 21;
+            this.Editbtn.Text = "Edit";
+            this.Editbtn.UseVisualStyleBackColor = true;
+            this.Editbtn.Click += new System.EventHandler(this.Editbtn_Click);
+            // 
             // InvoicesGroupBox
             // 
             this.InvoicesGroupBox.BackColor = System.Drawing.Color.White;
-            this.InvoicesGroupBox.Controls.Add(this.CreateInvoiceBtn);
             this.InvoicesGroupBox.Controls.Add(this.dtpPaidDate);
+            this.InvoicesGroupBox.Controls.Add(this.CreateInvoiceBtn);
             this.InvoicesGroupBox.Controls.Add(this.btnPrintInvoice);
             this.InvoicesGroupBox.Controls.Add(this.lblDatePaid);
             this.InvoicesGroupBox.Controls.Add(this.txtPaymentType);
@@ -330,14 +369,18 @@
             this.CreateInvoiceBtn.UseVisualStyleBackColor = true;
             this.CreateInvoiceBtn.Click += new System.EventHandler(this.CreateInvoiceBtn_Click);
             // 
-            // dtpPaidDate
+            // btnPrintInvoice
             // 
-            this.dtpPaidDate.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpPaidDate.Location = new System.Drawing.Point(982, 193);
-            this.dtpPaidDate.Name = "dtpPaidDate";
-            this.dtpPaidDate.Size = new System.Drawing.Size(129, 27);
-            this.dtpPaidDate.TabIndex = 15;
-            this.dtpPaidDate.Visible = false;
+            this.btnPrintInvoice.Depth = 0;
+            this.btnPrintInvoice.Location = new System.Drawing.Point(865, 283);
+            this.btnPrintInvoice.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnPrintInvoice.Name = "btnPrintInvoice";
+            this.btnPrintInvoice.Primary = true;
+            this.btnPrintInvoice.Size = new System.Drawing.Size(246, 52);
+            this.btnPrintInvoice.TabIndex = 13;
+            this.btnPrintInvoice.Text = "Print Monthly Invoice";
+            this.btnPrintInvoice.UseVisualStyleBackColor = true;
+            this.btnPrintInvoice.Click += new System.EventHandler(this.btnPrintInvoice_Click);
             // 
             // lblDatePaid
             // 
@@ -494,19 +537,6 @@
             this.txtSelectId.Size = new System.Drawing.Size(0, 13);
             this.txtSelectId.TabIndex = 12;
             // 
-            // btnPrintInvoice
-            // 
-            this.btnPrintInvoice.Depth = 0;
-            this.btnPrintInvoice.Location = new System.Drawing.Point(865, 283);
-            this.btnPrintInvoice.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnPrintInvoice.Name = "btnPrintInvoice";
-            this.btnPrintInvoice.Primary = true;
-            this.btnPrintInvoice.Size = new System.Drawing.Size(246, 52);
-            this.btnPrintInvoice.TabIndex = 13;
-            this.btnPrintInvoice.Text = "Print Monthly Invoice";
-            this.btnPrintInvoice.UseVisualStyleBackColor = true;
-            this.btnPrintInvoice.Click += new System.EventHandler(this.btnPrintInvoice_Click);
-            // 
             // materialRaisedButton1
             // 
             this.materialRaisedButton1.Depth = 0;
@@ -520,44 +550,15 @@
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
             this.materialRaisedButton1.Click += new System.EventHandler(this.createANewChargeAccountToolStripMenuItem_Click);
             // 
-            // Editbtn
+            // dtpPaidDate
             // 
-            this.Editbtn.Depth = 0;
-            this.Editbtn.Location = new System.Drawing.Point(1036, 32);
-            this.Editbtn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.Editbtn.Name = "Editbtn";
-            this.Editbtn.Primary = true;
-            this.Editbtn.Size = new System.Drawing.Size(96, 55);
-            this.Editbtn.TabIndex = 21;
-            this.Editbtn.Text = "Edit";
-            this.Editbtn.UseVisualStyleBackColor = true;
-            this.Editbtn.Click += new System.EventHandler(this.Editbtn_Click);
-            // 
-            // Createbtn
-            // 
-            this.Createbtn.Depth = 0;
-            this.Createbtn.Location = new System.Drawing.Point(1036, 93);
-            this.Createbtn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.Createbtn.Name = "Createbtn";
-            this.Createbtn.Primary = true;
-            this.Createbtn.Size = new System.Drawing.Size(96, 55);
-            this.Createbtn.TabIndex = 22;
-            this.Createbtn.Text = "Create";
-            this.Createbtn.UseVisualStyleBackColor = true;
-            this.Createbtn.Click += new System.EventHandler(this.Createbtn_Click);
-            // 
-            // Savebtn
-            // 
-            this.Savebtn.Depth = 0;
-            this.Savebtn.Location = new System.Drawing.Point(1036, 93);
-            this.Savebtn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.Savebtn.Name = "Savebtn";
-            this.Savebtn.Primary = true;
-            this.Savebtn.Size = new System.Drawing.Size(96, 55);
-            this.Savebtn.TabIndex = 23;
-            this.Savebtn.Text = "Save";
-            this.Savebtn.UseVisualStyleBackColor = true;
-            this.Savebtn.Click += new System.EventHandler(this.Savebtn_Click);
+            this.dtpPaidDate.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpPaidDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpPaidDate.Location = new System.Drawing.Point(982, 191);
+            this.dtpPaidDate.Name = "dtpPaidDate";
+            this.dtpPaidDate.Size = new System.Drawing.Size(129, 27);
+            this.dtpPaidDate.TabIndex = 17;
+            this.dtpPaidDate.Visible = false;
             // 
             // ChargeAccountUI
             // 
@@ -621,13 +622,13 @@
         private System.Windows.Forms.TextBox txtPaymentType;
         private System.Windows.Forms.Label lblPaymentType;
         private System.Windows.Forms.Label lblDatePaid;
-        private System.Windows.Forms.TextBox dtpPaidDate;
         private MaterialSkin.Controls.MaterialRaisedButton btnPrintInvoice;
         private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
         private MaterialSkin.Controls.MaterialRaisedButton CreateInvoiceBtn;
         private MaterialSkin.Controls.MaterialRaisedButton Createbtn;
         private MaterialSkin.Controls.MaterialRaisedButton Editbtn;
         private MaterialSkin.Controls.MaterialRaisedButton Savebtn;
+        private System.Windows.Forms.DateTimePicker dtpPaidDate;
     }
 }
 
