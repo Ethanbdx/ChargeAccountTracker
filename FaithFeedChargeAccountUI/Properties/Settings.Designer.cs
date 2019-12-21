@@ -26,8 +26,8 @@ namespace FaithFeedChargeAccountUI.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integra" +
-            "ted Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Temp\\FaithFeedSeed\\ChargeA" +
+            "ccountInvoices.mdf;Integrated Security=True")]
         public string ChargeAccountInvoicesConnectionString {
             get {
                 return ((string)(this["ChargeAccountInvoicesConnectionString"]));
