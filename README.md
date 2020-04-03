@@ -12,7 +12,7 @@ This program enabled the business to save plenty of time and money as they were 
 # Technologies Used
 - C#
 - .Net Standard
-- SQLite
+- SQL LocalDB
 # Images of Application
 ### Main UI
 ![Image of Main UI](https://i.imgur.com/Ym4RIGK.jpg)
