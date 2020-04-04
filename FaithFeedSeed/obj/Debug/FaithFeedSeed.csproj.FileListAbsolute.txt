@@ -9,3 +9,14 @@ C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\ChargeAccou
 C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\Dapper.dll
 C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\bin\Debug\Dapper.xml
 C:\Users\Ethanbdx\source\repos\FaithFeedSeed\FaithFeedSeed\obj\Debug\FaithFeedSeed.csproj.CopyComplete
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\ChargeAccountInvoices.mdf
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\ChargeAccountInvoices_log.ldf
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\FaithFeedSeed.dll
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\FaithFeedSeed.pdb
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\Dapper.dll
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\Dapper.xml
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Debug\FaithFeedSeed.csprojAssemblyReference.cache
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Debug\FaithFeedSeed.csproj.CopyComplete
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Debug\FaithFeedSeed.dll
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\obj\Debug\FaithFeedSeed.pdb
+E:\source\repos\ChargeAccountTracker\FaithFeedSeed\bin\Debug\FaithFeedSeed.dll.config

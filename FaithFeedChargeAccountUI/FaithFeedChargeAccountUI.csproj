@@ -53,10 +53,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3AAD1AD4723C43BF7B6BD0EA2273F3DF4CA333AA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5DC7FE55A342CD11D5C498E3401104A127FBE259</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>FaithFeedChargeAccountUI_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>FaithFeedChargeAccountUI_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -66,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>FaithFeedChargeAccountUI.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
@@ -141,36 +144,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChargeAccounts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChargeAccounts.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ChargeAccountUI.cs">
+    <Compile Include="Forms\ChargeAccountUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChargeAccountUI.Designer.cs">
+    <Compile Include="Forms\ChargeAccountUI.Designer.cs">
       <DependentUpon>ChargeAccountUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Invoices.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Invoices.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceUI.cs">
+    <Compile Include="Forms\InvoiceUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InvoiceUI.Designer.cs">
+    <Compile Include="Forms\InvoiceUI.Designer.cs">
       <DependentUpon>InvoiceUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlServerTypes\Loader.cs" />
-    <EmbeddedResource Include="ChargeAccountUI.resx">
+    <Compile Include="Reports\ChargeAccounts.Designer.cs">
+      <DependentUpon>ChargeAccounts.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Invoices.Designer.cs">
+      <DependentUpon>Invoices.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\ChargeAccountUI.resx">
       <DependentUpon>ChargeAccountUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceUI.resx">
+    <EmbeddedResource Include="Forms\InvoiceUI.resx">
       <DependentUpon>InvoiceUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -183,30 +184,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SelectedAccountInvoice.rdlc" />
-    <None Include="ChargeAccounts.xsc">
-      <DependentUpon>ChargeAccounts.xsd</DependentUpon>
-    </None>
-    <None Include="ChargeAccounts.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ChargeAccounts.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ChargeAccounts.xss">
-      <DependentUpon>ChargeAccounts.xsd</DependentUpon>
-    </None>
-    <None Include="FaithFeedChargeAccountUI_TemporaryKey.pfx" />
-    <None Include="Invoices.xsc">
-      <DependentUpon>Invoices.xsd</DependentUpon>
-    </None>
-    <None Include="Invoices.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Invoices.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Invoices.xss">
-      <DependentUpon>Invoices.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -217,6 +194,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Reports\ChargeAccounts.xsc">
+      <DependentUpon>ChargeAccounts.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\ChargeAccounts.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ChargeAccounts.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Reports\ChargeAccounts.xss">
+      <DependentUpon>ChargeAccounts.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Invoices.xsc">
+      <DependentUpon>Invoices.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Invoices.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Invoices.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Reports\Invoices.xss">
+      <DependentUpon>Invoices.xsd</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Reports\SelectedAccountInvoice.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -228,21 +228,6 @@
       <Project>{a811f4a5-6a11-4ac2-aab3-6b6f4313de26}</Project>
       <Name>FaithFeedSeed</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
