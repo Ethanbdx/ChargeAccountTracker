@@ -13,8 +13,3 @@ This program enabled the business to save plenty of time and money as they were 
 - C#
 - .Net Standard
 - SQL LocalDB
-# Images of Application
-### Main UI
-![Image of Main UI](https://i.imgur.com/Ym4RIGK.jpg)
-### Invoice Report
-![Image of Invoice Report](https://i.imgur.com/Mrs6cyF.jpg)
