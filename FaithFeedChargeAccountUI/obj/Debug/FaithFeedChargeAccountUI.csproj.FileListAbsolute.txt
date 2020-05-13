@@ -234,3 +234,5 @@ E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccountUI\obj\Debug\FaithFee
 E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccountUI\obj\Debug\FaithFeedChargeAccountUI.application
 E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccountUI\obj\Debug\FaithFeedChargeAccountUI.csproj.CopyComplete
 E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccountUI\bin\Debug\FaithFeedSeed.dll.config
+E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccountUI\obj\Debug\RdlCompile.cache
+E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccountUI\obj\Debug\RdlCompile.compiled

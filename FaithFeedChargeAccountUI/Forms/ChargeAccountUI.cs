@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using FaithFeedChargeAccountUI.Models;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace FaithFeedChargeAccountUI
 {
@@ -23,7 +25,7 @@ namespace FaithFeedChargeAccountUI
         public ChargeAccountUI()
         {   
             InitializeComponent();
-            WireUpDropdown();
+            PopulateDropDown();
         }
         #region Event Handlers
 
@@ -45,14 +47,14 @@ namespace FaithFeedChargeAccountUI
         private void Editbtn_Click(object sender, EventArgs e)
         {
             EditFields();
-            Savebtn.Enabled = true;
+            Editbtn.Visible = false;
+            Savebtn.Visible = true;
         }
         //Selection changes on account name dropdown
         private void SelectedChargeAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ReadOnlyFields();
             Createbtn.Visible = false;
-            Savebtn.Visible = true;
             DisplayFields();
             ClearInvoiceFields();
         }
@@ -97,6 +99,7 @@ namespace FaithFeedChargeAccountUI
                     GlobalConfig.Connections.CreateInvoice(inv);
                     FillDataGrid();
                     ClearInvoiceFields();
+                    PopulateAccountStats(selectedAccount.Id);
                     MessageBox.Show("New Invoice Created!");
                 }
                 else
@@ -126,7 +129,10 @@ namespace FaithFeedChargeAccountUI
                     GlobalConfig.Connections.UpdateInvoice(inv);
                     FillDataGrid();
                     ClearInvoiceFields();
+                    PopulateAccountStats(selectedAccount.Id);
                     MessageBox.Show("Sucessfully Upated Invoice!");
+                    CreateInvoiceBtn.Size = new Size(430, 68);
+
                 } 
                 else
                 {
@@ -155,7 +161,7 @@ namespace FaithFeedChargeAccountUI
                 ClearFields();
                 ReadOnlyFields();
                 MessageBox.Show("Sucessfully created new charge account!");
-                WireUpDropdown();
+                PopulateDropDown();
             }
             else
             {
@@ -180,12 +186,13 @@ namespace FaithFeedChargeAccountUI
                 PhoneNumberValue.Text,
                 AdditionalNotesValue.Text);
                 GlobalConfig.Connections.EditAccount(model);
-                WireUpDropdown();
+                PopulateDropDown();
                 ReadOnlyFields();
-                Savebtn.Enabled = false;
                 MessageBox.Show("Sucessfully edited information");
                 SelectedChargeAccount.SelectedIndex = CurrentAccount;
-                PopulateFields();
+                PopulateFields(model.Id);
+                Savebtn.Visible = false;
+                Editbtn.Visible = true;
             }
             else
             {
@@ -303,13 +310,13 @@ namespace FaithFeedChargeAccountUI
             }
             Editbtn.Visible = true;
             ChargeAccountGroupBox.Text = "Charge Account Details";
-            PopulateFields();
+            PopulateFields((int)SelectedChargeAccount.SelectedValue);
             FillDataGrid();
         }
-        private void PopulateFields()
+        private void PopulateFields(int accountId)
         {
            
-            ChargeAccountModel account = GlobalConfig.Connections.GetAccountInfo((int)SelectedChargeAccount.SelectedValue);
+            ChargeAccountModel account = GlobalConfig.Connections.GetAccountInfo(accountId);
             selectedAccount = account;
             AccountNameValue.Text = account.AccountName;
             FirstNameValue.Text = account.FirstName;
@@ -323,14 +330,15 @@ namespace FaithFeedChargeAccountUI
             if (ChargeAccountGroupBox.Text == "Charge Account Details")
             {
                 ChargeAccountGroupBox.Text += " - Id (" + account.Id + ")";
-            } 
+            }
+            PopulateAccountStats(accountId);
         }
-        private void WireUpDropdown()
+        private void PopulateDropDown()
         {
             var selAcct = SelectedChargeAccount;
             selAcct.DisplayMember = "AccountName";
             selAcct.ValueMember = "Id";
-            selAcct.DataSource = GlobalConfig.Connections.GetAccountNames_All();
+            selAcct.DataSource = GlobalConfig.Connections.GetAccountInfo_All();
             selAcct.SelectedIndex = -1;
         }
         private void FillDataGrid()
@@ -366,8 +374,6 @@ namespace FaithFeedChargeAccountUI
                 InvoiceNumberValue.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[3].Value.ToString();
                 InvoiceDatePicker.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[4].Value.ToString();
                 InvoiceAmountValue.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[5].Value.ToString();
-                txtPaymentType.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[7].Value.ToString();
-                dtpPaidDate.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[8].Value.ToString();
                 if (InvoicesDataGrid.Rows[e.RowIndex].Cells[6].Value.ToString() == "True")
                 {
                     InvoiceStatusValue.SelectedIndex = 1;
@@ -375,17 +381,27 @@ namespace FaithFeedChargeAccountUI
                     lblDatePaid.Visible = true;
                     txtPaymentType.Visible = true;
                     dtpPaidDate.Visible = true;
+                    txtPaymentType.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[7].Value.ToString();
+                    dtpPaidDate.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[8].Value.ToString();
                 }
                 else if (InvoicesDataGrid.Rows[e.RowIndex].Cells[6].Value.ToString() == "False")
                 {
                     InvoiceStatusValue.SelectedIndex = 0;
-                    dtpPaidDate.Text = null;
-                    txtPaymentType.Text = null;
+                    dtpPaidDate.Text = "";
+                    txtPaymentType.Text = "";
                 }
                 CreateInvoiceBtn.Text = "Update Invoice";
+                CreateInvoiceBtn.Size = new Size(212, 68);
             }
         }
-
+        private void PopulateAccountStats(int accountId)
+        {
+            ChargeAccountStatModel accountStats = GlobalConfig.Connections.GetChargeAccountStat(accountId);
+            TotalOwedLabel.Text = accountStats.TotalOwed.ToString("C2");
+            MonthlySalesLabel.Text = accountStats.MonthlySales.ToString("C2");
+            YTDSalesLabel.Text = accountStats.YTDSales.ToString("C2");
+            AvgDayLabel.Text = accountStats.AverageDays.ToString();
+        }
         private bool InvoiceStatus(string status)
         {
             if(status == "Paid")
@@ -430,7 +446,35 @@ namespace FaithFeedChargeAccountUI
 
         private void monthlyInvoices_Click(object sender, EventArgs e)
         {
+            //TODO: LOOP AND PRINT EVERY DUE INVOICE
             MessageBox.Show("Pretending like I'm printing every account's invoices");
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //TODO: File Dialog for DB Change
+            if(keyData == (Keys.Alt | Keys.D))
+            {
+                MessageBox.Show("Database edit mode.");
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void InvoiceNumberValue_TextChanged(object sender, EventArgs e)
+        {
+            if (InvoiceNumberValue.Text == "")
+            {
+                InvoiceStatusLabel.Visible = false;
+                InvoiceStatusValue.Visible = false;
+            }
+            else
+            {
+                InvoiceStatusLabel.Visible = true;
+                InvoiceStatusValue.Visible = true;
+            }
+        }
+        private void DeleteInvoiceBtn_Click(object sender, EventArgs e)
+        {
+            //TODO: THIS
         }
     }
 }
