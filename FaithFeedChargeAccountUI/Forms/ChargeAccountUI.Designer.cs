@@ -55,6 +55,11 @@
             this.Savebtn = new MaterialSkin.Controls.MaterialRaisedButton();
             this.Editbtn = new MaterialSkin.Controls.MaterialRaisedButton();
             this.InvoicesGroupBox = new System.Windows.Forms.GroupBox();
+            this.YTDSalesLabel = new System.Windows.Forms.Label();
+            this.MonthlySalesLabel = new System.Windows.Forms.Label();
+            this.AvgDayLabel = new System.Windows.Forms.Label();
+            this.TotalOwedLabel = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -79,11 +84,6 @@
             this.txtSelectId = new System.Windows.Forms.Label();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.printInvoicesBtn = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.label16 = new System.Windows.Forms.Label();
-            this.TotalOwedLabel = new System.Windows.Forms.Label();
-            this.AvgDayLabel = new System.Windows.Forms.Label();
-            this.MonthlySalesLabel = new System.Windows.Forms.Label();
-            this.YTDSalesLabel = new System.Windows.Forms.Label();
             this.ChargeAccountGroupBox.SuspendLayout();
             this.InvoicesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InvoicesDataGrid)).BeginInit();
@@ -376,6 +376,51 @@
             this.InvoicesGroupBox.Text = "Invoices";
             this.InvoicesGroupBox.Visible = false;
             // 
+            // YTDSalesLabel
+            // 
+            this.YTDSalesLabel.AutoSize = true;
+            this.YTDSalesLabel.Location = new System.Drawing.Point(1043, 375);
+            this.YTDSalesLabel.Name = "YTDSalesLabel";
+            this.YTDSalesLabel.Size = new System.Drawing.Size(97, 20);
+            this.YTDSalesLabel.TabIndex = 26;
+            this.YTDSalesLabel.Text = "$999,999.99";
+            // 
+            // MonthlySalesLabel
+            // 
+            this.MonthlySalesLabel.AutoSize = true;
+            this.MonthlySalesLabel.Location = new System.Drawing.Point(816, 375);
+            this.MonthlySalesLabel.Name = "MonthlySalesLabel";
+            this.MonthlySalesLabel.Size = new System.Drawing.Size(97, 20);
+            this.MonthlySalesLabel.TabIndex = 25;
+            this.MonthlySalesLabel.Text = "$999,999.99";
+            // 
+            // AvgDayLabel
+            // 
+            this.AvgDayLabel.AutoSize = true;
+            this.AvgDayLabel.Location = new System.Drawing.Point(1043, 283);
+            this.AvgDayLabel.Name = "AvgDayLabel";
+            this.AvgDayLabel.Size = new System.Drawing.Size(96, 20);
+            this.AvgDayLabel.TabIndex = 24;
+            this.AvgDayLabel.Text = "999,999,999";
+            // 
+            // TotalOwedLabel
+            // 
+            this.TotalOwedLabel.AutoSize = true;
+            this.TotalOwedLabel.Location = new System.Drawing.Point(816, 283);
+            this.TotalOwedLabel.Name = "TotalOwedLabel";
+            this.TotalOwedLabel.Size = new System.Drawing.Size(97, 20);
+            this.TotalOwedLabel.TabIndex = 23;
+            this.TotalOwedLabel.Text = "$999,999.99";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1043, 248);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(158, 20);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "Average Days to Pay:";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -637,51 +682,6 @@
             this.printInvoicesBtn.Text = "Print Monthly Invoices";
             this.printInvoicesBtn.UseVisualStyleBackColor = true;
             this.printInvoicesBtn.Click += new System.EventHandler(this.monthlyInvoices_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1043, 248);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(158, 20);
-            this.label16.TabIndex = 22;
-            this.label16.Text = "Average Days to Pay:";
-            // 
-            // TotalOwedLabel
-            // 
-            this.TotalOwedLabel.AutoSize = true;
-            this.TotalOwedLabel.Location = new System.Drawing.Point(816, 283);
-            this.TotalOwedLabel.Name = "TotalOwedLabel";
-            this.TotalOwedLabel.Size = new System.Drawing.Size(97, 20);
-            this.TotalOwedLabel.TabIndex = 23;
-            this.TotalOwedLabel.Text = "$999,999.99";
-            // 
-            // AvgDayLabel
-            // 
-            this.AvgDayLabel.AutoSize = true;
-            this.AvgDayLabel.Location = new System.Drawing.Point(1043, 283);
-            this.AvgDayLabel.Name = "AvgDayLabel";
-            this.AvgDayLabel.Size = new System.Drawing.Size(96, 20);
-            this.AvgDayLabel.TabIndex = 24;
-            this.AvgDayLabel.Text = "999,999,999";
-            // 
-            // MonthlySalesLabel
-            // 
-            this.MonthlySalesLabel.AutoSize = true;
-            this.MonthlySalesLabel.Location = new System.Drawing.Point(816, 375);
-            this.MonthlySalesLabel.Name = "MonthlySalesLabel";
-            this.MonthlySalesLabel.Size = new System.Drawing.Size(97, 20);
-            this.MonthlySalesLabel.TabIndex = 25;
-            this.MonthlySalesLabel.Text = "$999,999.99";
-            // 
-            // YTDSalesLabel
-            // 
-            this.YTDSalesLabel.AutoSize = true;
-            this.YTDSalesLabel.Location = new System.Drawing.Point(1043, 375);
-            this.YTDSalesLabel.Name = "YTDSalesLabel";
-            this.YTDSalesLabel.Size = new System.Drawing.Size(97, 20);
-            this.YTDSalesLabel.TabIndex = 26;
-            this.YTDSalesLabel.Text = "$999,999.99";
             // 
             // ChargeAccountUI
             // 

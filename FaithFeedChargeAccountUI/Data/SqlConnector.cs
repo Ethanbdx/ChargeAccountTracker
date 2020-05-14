@@ -7,6 +7,7 @@ using System.Data;
 using FaithFeedSeed;
 using Dapper;
 using FaithFeedChargeAccountUI.Models;
+using System.Data.SqlClient;
 
 namespace FaithFeedSeed
 {
@@ -16,7 +17,7 @@ namespace FaithFeedSeed
 
         public ChargeAccountModel CreateAccount(ChargeAccountModel model)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@AccountName", model.AccountName);
@@ -36,7 +37,7 @@ namespace FaithFeedSeed
 
         public InvoiceModel CreateInvoice(InvoiceModel inv)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@InvoiceNumber", inv.InvoiceNumber);
@@ -54,7 +55,7 @@ namespace FaithFeedSeed
         public ChargeAccountModel EditAccount(ChargeAccountModel model)
         {
 
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@id", model.Id);
@@ -74,7 +75,7 @@ namespace FaithFeedSeed
 
         public ChargeAccountModel GetAccountInfo(int Id)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 ChargeAccountModel output;
                 output = connection.QueryFirst<ChargeAccountModel>("dbo.spGetAccountInfo", new { Id = Id }, commandType: CommandType.StoredProcedure);
@@ -84,7 +85,7 @@ namespace FaithFeedSeed
 
         public List<ChargeAccountModel> GetAccountInfo_All()
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 List<ChargeAccountModel> output;
                 output = connection.Query<ChargeAccountModel>("dbo.spGetAccountInfo_All").ToList();
@@ -94,7 +95,7 @@ namespace FaithFeedSeed
 
         public void UpdateInvoice(InvoiceModel inv)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@SelectedInvoice", inv.InvoiceId);
@@ -110,7 +111,7 @@ namespace FaithFeedSeed
         }
         public List<InvoiceModel> GetInvoices(int accId)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 List<InvoiceModel> invoices = connection.Query<InvoiceModel>("dbo.spGetInvoices", new { accountId = accId }, commandType: CommandType.StoredProcedure).ToList();
                 return invoices;
@@ -119,10 +120,18 @@ namespace FaithFeedSeed
 
         public ChargeAccountStatModel GetChargeAccountStat(int accountId)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 ChargeAccountStatModel stats = connection.QueryFirst<ChargeAccountStatModel>("dbo.spGetAccountStats", new { accountId = accountId }, commandType: CommandType.StoredProcedure);
                 return stats;
+            }
+        }
+
+        public void DeleteInvoice(int invoiceId)
+        {
+            using(IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                connection.Execute("dbo.spDeleteInvoice", new { invoiceId = invoiceId }, commandType: CommandType.StoredProcedure);
             }
         }
     }

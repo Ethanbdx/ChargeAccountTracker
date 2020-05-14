@@ -474,7 +474,10 @@ namespace FaithFeedChargeAccountUI
         }
         private void DeleteInvoiceBtn_Click(object sender, EventArgs e)
         {
-            //TODO: THIS
+            GlobalConfig.Connections.DeleteInvoice(selectedInvoice.InvoiceId);
+            ClearInvoiceFields();
+            FillDataGrid();
+            PopulateAccountStats(selectedAccount.Id);
         }
     }
 }

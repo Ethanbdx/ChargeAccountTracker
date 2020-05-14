@@ -21,6 +21,8 @@ namespace FaithFeedSeed
 
         void UpdateInvoice(InvoiceModel inv);
 
+        void DeleteInvoice(int invoiceId);
+
         ChargeAccountStatModel GetChargeAccountStat(int accountId);
 
         List<InvoiceModel> GetInvoices(int accountId);

@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FaithFeedChargeAccountUI.exe" size="168408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FaithFeedChargeAccountUI.exe" size="169432">
       <assemblyIdentity name="FaithFeedChargeAccountUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LDMGA8ZKy06nH8j1R/SwbsiayPV3pvJ9gW+Ls70ki+U=</dsig:DigestValue>
+        <dsig:DigestValue>AVi/rbFPwerwamfe4vkFEEsSIHmX+lDdqpxm+vzF+44=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
