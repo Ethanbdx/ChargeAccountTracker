@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/13/2020 05:37:06" ReportInfo.Modified="05/13/2020 06:02:51" ReportInfo.CreatorVersion="2020.1.0.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="FaithFeed" ConnectionString="rijcmlqS0qc9gNPoWfWmM9Pko/C2rH/q63A2wV9QUUAk+Q6rID76VlXgfIPCua0L57ML3/W1yHNMwVvLliSzK+HROU+/QxqtgKp50wXoX6wmM9bz/rvMMbz3n4/rfPpcPM3xEp4I72KTMOt7W2BtU1u7tgHET5znUBb5KYf58bZLdon+XRlbih152OiVd7z4xztmE4k66HhV6DfRiXxRsTk9VRY5iJTgL1oBzFn0liFZEMmM71tBaG4fQ5s34sIDd6eWHlMAnsgd4w0rmA42mET/cIw18oSYJSlM/XNWcMWwoO6wiaTE867yf2xUU4+UCZU79/e">
+      <TableDataSource Name="Table" Alias="AccountInfo" DataType="System.Int32" Enabled="true" SelectCommand="select * from ChargeAccounts where Id = @AccountId">
+        <Column Name="Id" DataType="System.Int32"/>
+        <Column Name="AccountName" DataType="System.String"/>
+        <Column Name="FirstName" DataType="System.String"/>
+        <Column Name="LastName" DataType="System.String"/>
+        <Column Name="Address" DataType="System.String"/>
+        <Column Name="City" DataType="System.String"/>
+        <Column Name="State" DataType="System.String"/>
+        <Column Name="ZipCode" DataType="System.String"/>
+        <Column Name="PhoneNumber" DataType="System.String"/>
+        <Column Name="AdditionalNotes" DataType="System.String"/>
+        <CommandParameter Name="AccountId" DataType="8" DefaultValue="0"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="AccountId" DataType="System.Int32"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Guides="374.4,374.4,384,192,192,384" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Top="20" Width="718.2"/>
+    <PageHeaderBand Name="PageHeader1" Top="40" Width="718.2" Height="355.2">
+      <TextObject Name="Text1" Left="290.1" Top="19.2" Width="170.7" Height="37.8" Text="Invoice&#13;&#10;" Font="Tahoma, 28pt, style=Bold" TextFill.Color="MediumBlue"/>
+      <TextObject Name="Text2" Left="19.2" Top="96.15" Width="297.6" Height="28.8" Text="Faith Feed &amp; Seed LLC" Font="Tahoma, 16pt, style=Bold, Italic"/>
+      <TextObject Name="Text3" Left="19.2" Top="124.95" Width="297.6" Height="48" Text="1900 St. Mary Street&#13;&#10;Thibodaux, LA 70301" Font="Tahoma, 12pt"/>
+      <TextObject Name="Text4" Left="566.4" Top="124.95" Width="124.8" Height="19.2" Text="(985) 446-5984" Font="Tahoma, 12pt"/>
+      <TextObject Name="Text5" Left="19.2" Top="201.6" Width="96" Height="19.2" Text="Bill To:&#13;&#10;" Font="Tahoma, 12pt, style=Bold"/>
+      <TextObject Name="Text6" Left="489.6" Top="192" Width="201.6" Height="76.8" Text="Any invoice not paid within 30 days will have a 15% service charge added." Font="Tahoma, 12pt, style=Bold"/>
+      <TextObject Name="Text7" Left="19.2" Top="220.8" Width="96" Height="19.2" Font="Tahoma, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="415.2" Width="718.2" Height="75.6"/>
+    <PageFooterBand Name="PageFooter1" Top="510.8" Width="718.2"/>
+  </ReportPage>
+</Report>

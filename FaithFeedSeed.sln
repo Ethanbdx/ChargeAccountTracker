@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeedChargeAccount", "FaithFeedChargeAccountUI\FaithFeedChargeAccount.csproj", "{62D10485-76E6-4366-8529-0DC5D24170B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeedChargeAccount", "FaithFeedChargeAccount\FaithFeedChargeAccount.csproj", "{62D10485-76E6-4366-8529-0DC5D24170B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
