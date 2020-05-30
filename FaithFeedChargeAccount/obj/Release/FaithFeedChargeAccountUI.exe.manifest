@@ -641,13 +641,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="FaithFeedChargeAccountUI.exe.config" size="1442">
+  <file name="FaithFeedChargeAccountUI.exe.config" size="1447">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>xUnBwXHR88p324RWIpUMyYEoE/oWnRGQdWB5Po/lclY=</dsig:DigestValue>
+      <dsig:DigestValue>uLRStepVb3BVoknMFMQYt5EBSk+2O2E+YcwRMxk70Dg=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
