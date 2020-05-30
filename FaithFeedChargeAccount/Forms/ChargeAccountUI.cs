@@ -241,8 +241,10 @@ namespace FaithFeedChargeAccountUI
                 };
                 reportService.ProcessReport(sources, "SelectedAccountInvoice.rdlc");
                 //TODO: Allow for changing of directory.
-                reportService.pdfDoc.Save(@"C:Users\Ethanbdx\Desktop\test.pdf");
+                reportService.pdfDoc.Save($@"C:Users\{Environment.UserName}\Desktop\{DateTime.Now.Month - 1}-{DateTime.Now.Year}-Invoices.pdf");
             }
+            MessageBox.Show("Done Processing Monthly Invoices.\n" +
+                    "Check the desktop for the file.");
         }
         private void InvoiceNumberValue_TextChanged(object sender, EventArgs e)
         {

@@ -88,7 +88,7 @@ namespace FaithFeedSeed
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 List<ChargeAccountModel> output;
-                output = connection.Query<ChargeAccountModel>("dbo.spGetAccountInfo_All").ToList();
+                output = connection.Query<ChargeAccountModel>("dbo.spGetAccountInfo_All").ToList().OrderBy(a => a.AccountName).ToList();
                 return output;
             }
         }

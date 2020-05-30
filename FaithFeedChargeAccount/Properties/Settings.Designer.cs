@@ -26,8 +26,8 @@ namespace FaithFeedChargeAccountUI.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=C:\\USERS\\ETHANBDX\\SOURCE\\REPOS" +
-            "\\FAITHFEEDSEED\\FAITHFEEDSEED\\CHARGEACCOUNTINVOICES.MDF;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=FaithFeedSeed;Integrated Secur" +
+            "ity=True")]
         public string ChargeAccountInvoicesConnectionString {
             get {
                 return ((string)(this["ChargeAccountInvoicesConnectionString"]));
