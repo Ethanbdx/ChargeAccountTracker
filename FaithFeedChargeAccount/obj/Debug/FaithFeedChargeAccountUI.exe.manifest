@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FaithFeedChargeAccountUI.exe" size="173528">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FaithFeedChargeAccountUI.exe" size="174040">
       <assemblyIdentity name="FaithFeedChargeAccountUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fvQIMhJWpMUfbYka2avYJbqALQi58ubsPU5uN/mnyi4=</dsig:DigestValue>
+        <dsig:DigestValue>ZvVfOSjiKnMI1P2QT/ht1AUzaUg/vkgmOx3FN7WTnUU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -641,13 +641,22 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="FaithFeedChargeAccountUI.exe.config" size="1691">
+  <file name="FaithFeedChargeAccountUI.exe.config" size="1460">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>dL+C8vxbfs4tBSCmQxJ8iD7SjQN5+4d6mALP3levTpc=</dsig:DigestValue>
+      <dsig:DigestValue>DTSs7OmySQ1Qlh37mf4Gu3yXmNd+qQeZxUe8FslvtBg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="FaithFeedSeed.mdf" size="8388608" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6sPvKu+JegbklnGqH/pSSsuZ6uIbYHDLcjdtcXVWsi4=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

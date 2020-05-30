@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="FaithFeedChargeAccountUI.exe.manifest" size="38787">
+    <dependentAssembly dependencyType="install" codebase="FaithFeedChargeAccountUI.exe.manifest" size="39217">
       <assemblyIdentity name="FaithFeedChargeAccountUI.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="en" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>KhEB30x8NDJeR+pavgHVWowaV2ZL6OYreWLNnm8VdTI=</dsig:DigestValue>
+        <dsig:DigestValue>twpOYX8ATo3YvnqYEeY5sWLIh/YcfddZ0wt59tgh/kg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
