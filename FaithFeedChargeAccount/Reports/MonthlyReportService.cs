@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FaithFeedChargeAccountUI.Reports
+namespace FaithFeed.UI.Reports
 {
     public class MonthlyReportService
     {

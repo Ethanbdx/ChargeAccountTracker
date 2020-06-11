@@ -1,15 +1,13 @@
-﻿namespace FaithFeedChargeAccountUI.Reports
-{
+﻿namespace FaithFeed.UI.Reports {
 
 
-    partial class Invoices
-    {
+    partial class Invoices {
     }
 }
 
-namespace FaithFeedChargeAccountUI.InvoicesTableAdapters {
-    
-    
+namespace FaithFeed.UI.Reports.InvoicesTableAdapters {
+
+
     public partial class InvoicesTableAdapter {
     }
 }

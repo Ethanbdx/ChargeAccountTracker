@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using FaithFeedSeed;
 using Dapper;
-using FaithFeedChargeAccountUI.Models;
+using FaithFeed.UI.Models;
 using System.Data.SqlClient;
+using FaithFeed.UI;
 
-namespace FaithFeedSeed
+namespace FaithFeed.UI
 {
     public class SqlConnector : IDataConnection
     {

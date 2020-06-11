@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace FaithFeedChargeAccountUI.Reports {
+namespace FaithFeed.UI.Reports {
     
     
     /// <summary>
@@ -636,7 +636,7 @@ namespace FaithFeedChargeAccountUI.Reports {
         }
     }
 }
-namespace FaithFeedChargeAccountUI.Reports.InvoicesTableAdapters {
+namespace FaithFeed.UI.Reports.InvoicesTableAdapters {
     
     
     /// <summary>
@@ -770,7 +770,7 @@ namespace FaithFeedChargeAccountUI.Reports.InvoicesTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::FaithFeedChargeAccountUI.Properties.Settings.Default.ChargeAccountInvoicesConnectionString;
+            this._connection.ConnectionString = global::FaithFeed.UI.Properties.Settings.Default.ChargeAccountInvoicesConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

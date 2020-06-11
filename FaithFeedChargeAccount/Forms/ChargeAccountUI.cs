@@ -1,5 +1,4 @@
-﻿using FaithFeedSeed;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,11 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
-using FaithFeedChargeAccountUI.Models;
+using FaithFeed.UI.Models;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using FaithFeedChargeAccountUI.Reports;
+using FaithFeed.UI.Reports;
 
-namespace FaithFeedChargeAccountUI
+namespace FaithFeed.UI
 {
 
     public partial class ChargeAccountUI : MaterialForm

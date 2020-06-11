@@ -8,8 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FaithFeedChargeAccountUI.Reports;
-namespace FaithFeedChargeAccountUI
+using FaithFeed.UI.Reports;
+namespace FaithFeed.UI
 {
     
     public partial class InvoiceUI : Form

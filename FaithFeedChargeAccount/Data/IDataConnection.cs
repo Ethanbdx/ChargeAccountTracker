@@ -1,11 +1,11 @@
-﻿using FaithFeedChargeAccountUI.Models;
+﻿using FaithFeed.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FaithFeedSeed
+namespace FaithFeed.UI
 {
     public interface IDataConnection
     {

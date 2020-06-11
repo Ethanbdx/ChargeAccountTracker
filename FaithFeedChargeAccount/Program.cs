@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FaithFeedChargeAccountUI
+namespace FaithFeed.UI
 {
     static class Program
     {
@@ -18,7 +18,7 @@ namespace FaithFeedChargeAccountUI
             Application.SetCompatibleTextRenderingDefault(false);
 
             //Initalize DB connection
-            FaithFeedSeed.GlobalConfig.InitializeConnections(true);
+            FaithFeed.UI.GlobalConfig.InitializeConnections(true);
 
             Application.Run(new ChargeAccountUI());
         }

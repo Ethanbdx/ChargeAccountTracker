@@ -1,4 +1,4 @@
-﻿namespace FaithFeedChargeAccountUI
+﻿namespace FaithFeed.UI
 {
 
 

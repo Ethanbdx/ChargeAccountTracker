@@ -1,0 +1,6 @@
+E:\source\repos\ChargeAccountTracker\FaithFeed.Common\bin\Debug\FaithFeed.Common.dll
+E:\source\repos\ChargeAccountTracker\FaithFeed.Common\bin\Debug\FaithFeed.Common.pdb
+E:\source\repos\ChargeAccountTracker\FaithFeed.Common\obj\Debug\FaithFeed.Common.csprojAssemblyReference.cache
+E:\source\repos\ChargeAccountTracker\FaithFeed.Common\obj\Debug\FaithFeed.Common.csproj.CoreCompileInputs.cache
+E:\source\repos\ChargeAccountTracker\FaithFeed.Common\obj\Debug\FaithFeed.Common.dll
+E:\source\repos\ChargeAccountTracker\FaithFeed.Common\obj\Debug\FaithFeed.Common.pdb

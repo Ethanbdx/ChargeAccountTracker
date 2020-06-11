@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{62D10485-76E6-4366-8529-0DC5D24170B5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FaithFeedChargeAccountUI</RootNamespace>
-    <AssemblyName>FaithFeedChargeAccountUI</AssemblyName>
+    <RootNamespace>FaithFeed.UI</RootNamespace>
+    <AssemblyName>FaithFeed.UI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -65,7 +65,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>FaithFeedChargeAccountUI.Program</StartupObject>
+    <StartupObject>FaithFeed.UI.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -210,6 +210,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
@@ -287,6 +288,10 @@
   <ItemGroup>
     <Content Include="FaithFeedSeed.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FaithFeedSeed_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>FaithFeedSeed.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
