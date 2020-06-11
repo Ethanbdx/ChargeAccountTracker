@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeedChargeAccount", "FaithFeedChargeAccount\FaithFeedChargeAccount.csproj", "{62D10485-76E6-4366-8529-0DC5D24170B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeed.UI", "FaithFeedChargeAccount\FaithFeed.UI.csproj", "{62D10485-76E6-4366-8529-0DC5D24170B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeed.Common", "FaithFeed.Common\FaithFeed.Common.csproj", "{90C938B1-EA5C-4183-9B62-15789FE5894F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{62D10485-76E6-4366-8529-0DC5D24170B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62D10485-76E6-4366-8529-0DC5D24170B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62D10485-76E6-4366-8529-0DC5D24170B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90C938B1-EA5C-4183-9B62-15789FE5894F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90C938B1-EA5C-4183-9B62-15789FE5894F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90C938B1-EA5C-4183-9B62-15789FE5894F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90C938B1-EA5C-4183-9B62-15789FE5894F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
