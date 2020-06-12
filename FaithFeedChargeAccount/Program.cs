@@ -17,9 +17,6 @@ namespace FaithFeed.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Initalize DB connection
-            FaithFeed.UI.GlobalConfig.InitializeConnections(true);
-
             Application.Run(new ChargeAccountUI());
         }
     }

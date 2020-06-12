@@ -1,5 +1,4 @@
-﻿using Microsoft.Reporting.WinForms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,21 +10,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
-using FaithFeed.UI.Models;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using FaithFeed.UI.Reports;
+using FaithFeed.Common.Models;
+using FaithFeed.Common;
+using FaithFeed.Common.Business.Reports;
+using FaithFeed.Common.DAOs;
+using System.Data.Common;
 
 namespace FaithFeed.UI
 {
 
     public partial class ChargeAccountUI : MaterialForm
     {
+        private InvoiceDAO InvoiceDAO;
+        private ChargeAccountDAO ChargeAccountDAO;
         private ChargeAccountModel selectedAccount;
         private InvoiceModel selectedInvoice;
         public ChargeAccountUI()
         {
+            this.ChargeAccountDAO = new ChargeAccountDAO();
+            this.InvoiceDAO = new InvoiceDAO();
             InitializeComponent();
             PopulateDropDown();
+
+
         }
         #region Event Handlers
 
@@ -97,7 +105,7 @@ namespace FaithFeed.UI
                         inv.PaymentType = "";
                         inv.PaidDate = "";
                     }
-                    GlobalConfig.Connections.CreateInvoice(inv);
+                    InvoiceDAO.CreateInvoice(inv);
                     FillDataGrid();
                     ClearInvoiceFields();
                     PopulateAccountStats(selectedAccount.Id);
@@ -127,7 +135,7 @@ namespace FaithFeed.UI
                         inv.PaymentType = "";
                         inv.PaidDate = "";
                     }
-                    GlobalConfig.Connections.UpdateInvoice(inv);
+                    this.InvoiceDAO.UpdateInvoice(inv);
                     FillDataGrid();
                     ClearInvoiceFields();
                     PopulateAccountStats(selectedAccount.Id);
@@ -147,7 +155,7 @@ namespace FaithFeed.UI
             if (ValidateForm())
             {
                 ChargeAccountModel model = new ChargeAccountModel(
-                -1,
+                0,
                 AccountNameValue.Text,
                 FirstNameValue.Text,
                 LastNameValue.Text,
@@ -157,7 +165,7 @@ namespace FaithFeed.UI
                 ZipValue.Text,
                 PhoneNumberValue.Text,
                 AdditionalNotesValue.Text);
-                GlobalConfig.Connections.CreateAccount(model);
+                this.ChargeAccountDAO.CreateAccount(model);
                 AccountNameValue.ReadOnly = true;
                 ClearFields();
                 ReadOnlyFields();
@@ -186,7 +194,7 @@ namespace FaithFeed.UI
                 ZipValue.Text,
                 PhoneNumberValue.Text,
                 AdditionalNotesValue.Text);
-                GlobalConfig.Connections.EditAccount(model);
+                this.ChargeAccountDAO.EditAccount(model);
                 PopulateDropDown();
                 ReadOnlyFields();
                 MessageBox.Show("Sucessfully edited information");
@@ -222,23 +230,23 @@ namespace FaithFeed.UI
         }
         private void monthlyInvoices_Click(object sender, EventArgs e)
         {
-            List<int> accounts = GlobalConfig.Connections.GetMonthlyInvoiceAccounts();
+            List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
             MonthlyReportService reportService = new MonthlyReportService();
-            foreach (int i in accounts)
+            foreach (int id in accountIds)
             {
-                
-                var InvoiceDT = new Invoices.InvoicesDataTable();
-                var InvTableAdapter = new Reports.InvoicesTableAdapters.InvoicesTableAdapter();
-                InvTableAdapter.Fill(InvoiceDT, i);
-                var AccountDT = new ChargeAccounts.ChargeAccountsDataTable();
-                var AccTableAdapter = new Reports.ChargeAccountsTableAdapters.ChargeAccountsTableAdapter();
-                AccTableAdapter.Fill(AccountDT, i);
-                ReportDataSource[] sources = new ReportDataSource[]
-                {
-                    new ReportDataSource("Invoices", InvoiceDT as DataTable),
-                    new ReportDataSource("ChargeAccounts", AccountDT as DataTable)
-                };
-                reportService.ProcessReport(sources, "SelectedAccountInvoice.rdlc");
+
+                //var InvoiceDataTable = new DataTable();
+                //var InvoiceTableAdapter = new DataAdapter();
+                //InvTableAdapter.Fill(InvoiceDT, i);
+                //var AccountDT = new ChargeAccounts.ChargeAccountsDataTable();
+                //var AccTableAdapter = new Reports.ChargeAccountsTableAdapters.ChargeAccountsTableAdapter();
+                //AccTableAdapter.Fill(AccountDT, i);
+                //ReportDataSource[] sources = new ReportDataSource[]
+                //{
+                //    new ReportDataSource("Invoices", InvoiceDT),
+                //    new ReportDataSource("ChargeAccounts", AccountDT)
+                //};
+                //reportService.ProcessReport(sources, "SelectedAccountInvoice.rdlc");
                 //TODO: Allow for changing of directory.
                 reportService.pdfDoc.Save($@"C:Users\{Environment.UserName}\Desktop\{DateTime.Now.Month - 1}-{DateTime.Now.Year}-Invoices.pdf");
             }
@@ -260,7 +268,7 @@ namespace FaithFeed.UI
         }
         private void DeleteInvoiceBtn_Click(object sender, EventArgs e)
         {
-            GlobalConfig.Connections.DeleteInvoice(selectedInvoice.InvoiceId);
+            InvoiceDAO.DeleteInvoice(selectedInvoice.InvoiceId);
             ClearInvoiceFields();
             FillDataGrid();
             PopulateAccountStats(selectedAccount.Id);
@@ -414,7 +422,7 @@ namespace FaithFeed.UI
         private void PopulateFields(int accountId)
         {
 
-            ChargeAccountModel account = GlobalConfig.Connections.GetAccountInfo(accountId);
+            ChargeAccountModel account = ChargeAccountDAO.GetAccountInfo(accountId);
             selectedAccount = account;
             AccountNameValue.Text = account.AccountName;
             FirstNameValue.Text = account.FirstName;
@@ -436,7 +444,7 @@ namespace FaithFeed.UI
             var selAcct = SelectedChargeAccount;
             selAcct.DisplayMember = "AccountName";
             selAcct.ValueMember = "Id";
-            selAcct.DataSource = GlobalConfig.Connections.GetAccountInfo_All();
+            selAcct.DataSource = this.ChargeAccountDAO.GetAllAccounts();
             selAcct.SelectedIndex = -1;
         }
         private void FillDataGrid()
@@ -444,7 +452,7 @@ namespace FaithFeed.UI
             var idg = InvoicesDataGrid;
             var cols = idg.Columns;
             idg.ReadOnly = true;
-            idg.DataSource = GlobalConfig.Connections.GetInvoices(selectedAccount.Id);
+            idg.DataSource = InvoiceDAO.GetAccountInvoices(selectedAccount.Id);
             cols[1].Visible = false;
             cols[2].Visible = false;
             cols[0].Width = 65;
@@ -463,7 +471,7 @@ namespace FaithFeed.UI
         }
         private void PopulateAccountStats(int accountId)
         {
-            ChargeAccountStatModel accountStats = GlobalConfig.Connections.GetChargeAccountStat(accountId);
+            ChargeAccountStatModel accountStats = ChargeAccountDAO.GetAccountStats(accountId);
             TotalOwedLabel.Text = accountStats.TotalOwed.ToString("C2");
             MonthlySalesLabel.Text = accountStats.MonthlySales.ToString("C2");
             YTDSalesLabel.Text = accountStats.YTDSales.ToString("C2");
