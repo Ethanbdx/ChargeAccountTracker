@@ -9,7 +9,7 @@ namespace FaithFeed.Common
 {
     public static class GlobalConfig
     {
-        public static string CnnString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\source\repos\ChargeAccountTracker\FaithFeedChargeAccount\FaithFeedSeed.mdf;Integrated Security=True";
+        public static string CnnString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\source\repos\ChargeAccountTracker\FaithFeed.UI\FaithFeedSeed.mdf;Integrated Security=True";
 
     }  
 }
