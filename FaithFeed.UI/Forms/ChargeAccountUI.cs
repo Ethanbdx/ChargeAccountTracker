@@ -13,34 +13,30 @@ using MaterialSkin.Controls;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using FaithFeed.Common.Models;
 using FaithFeed.Common;
-using FaithFeed.Common.Business.Reports;
+using FaithFeed.Common.Business;
 using FaithFeed.Common.DAOs;
 using System.Data.Common;
+using Microsoft.Reporting.WinForms;
+using System.IO;
+using System.Diagnostics;
 
-namespace FaithFeed.UI
-{
+namespace FaithFeed.UI {
 
-    public partial class ChargeAccountUI : MaterialForm
-    {
+    public partial class ChargeAccountUI : MaterialForm {
         private InvoiceDAO InvoiceDAO;
         private ChargeAccountDAO ChargeAccountDAO;
         private ChargeAccountModel selectedAccount;
         private InvoiceModel selectedInvoice;
-        public ChargeAccountUI()
-        {
+        public ChargeAccountUI() {
             this.ChargeAccountDAO = new ChargeAccountDAO();
             this.InvoiceDAO = new InvoiceDAO();
             InitializeComponent();
             PopulateDropDown();
-
-
         }
         #region Event Handlers
 
-        private void CreateNewAccount_Click(object sender, EventArgs e)
-        {
-            if (InvoicesGroupBox.Visible)
-            {
+        private void CreateNewAccount_Click(object sender, EventArgs e) {
+            if (InvoicesGroupBox.Visible) {
                 InvoicesGroupBox.Visible = false;
                 btnPrintInvoice.Visible = false;
             }
@@ -53,55 +49,56 @@ namespace FaithFeed.UI
             ChargeAccountGroupBox.Visible = true;
             AccountNameValue.ReadOnly = false;
         }
-        private void Editbtn_Click(object sender, EventArgs e)
-        {
+        private void Editbtn_Click(object sender, EventArgs e) {
             EditFields();
             Editbtn.Visible = false;
             Savebtn.Visible = true;
         }
         //Selection changes on account name dropdown
-        private void SelectedChargeAccount_SelectionChangeCommitted(object sender, EventArgs e)
-        {
+        private void SelectedChargeAccount_SelectionChangeCommitted(object sender, EventArgs e) {
             ReadOnlyFields();
             Createbtn.Visible = false;
             DisplayFields();
             ClearInvoiceFields();
         }
         //Creating an invoice from the selectedID. 
-        public void btnPrintInvoice_Click(object sender, EventArgs e)
-        {
-            if (selectedAccount.Id == 0)
-            {
+        public void btnPrintInvoice_Click(object sender, EventArgs e) {
+            if (selectedAccount.Id == 0) {
                 MessageBox.Show("You must select an account first.");
-            }
-            else
-            {
-                InvoiceUI form = new InvoiceUI(selectedAccount.Id);
-                form.Show();
+            } else {
+                var reportService = new ReportService();
+                ReportDataSource[] sources = new ReportDataSource[]
+                {
+                    new ReportDataSource("Invoices", this.InvoiceDAO.GetMonthlyInvoices(selectedAccount.Id)),
+                    new ReportDataSource("ChargeAccounts", new List<ChargeAccountModel> {
+                        this.ChargeAccountDAO.GetAccountInfo(selectedAccount.Id)
+                    })
+                };
+                reportService.CreateReport(sources, "SelectedAccountInvoice.rdlc");
+                //TODO: Allow for changing of directory.
+                string folderPath = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Accounts\{selectedAccount.AccountName}").FullName;
+                string fileName = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
+                string path = Path.Combine(folderPath, fileName);
+                reportService.pdfDoc.Save(path);
+                Process.Start(path);
             }
         }
+        //TODO: DRY this up, and extract it from here.
         //Valdiation for new invoices.
-        private void CreateInvoiceBtn_Click(object sender, EventArgs e)
-        {
-            if (CreateInvoiceBtn.Text == "Create Invoice")
-            {
-                if (ValidateInvoice())
-                {
-                    InvoiceModel inv = new InvoiceModel()
-                    {
+        private void CreateInvoiceBtn_Click(object sender, EventArgs e) {
+            if (CreateInvoiceBtn.Text == "Create Invoice") {
+                if (ValidateInvoice()) {
+                    InvoiceModel inv = new InvoiceModel() {
                         AccountId = selectedAccount.Id,
                         InvoiceNumber = InvoiceNumberValue.Text,
                         InvoiceAmount = Double.Parse(InvoiceAmountValue.Text),
                         IsPaid = InvoiceStatus(InvoiceStatusValue.Text),
                         Date = InvoiceDatePicker.Value
                     };
-                    if (txtPaymentType.Visible)
-                    {
+                    if (txtPaymentType.Visible) {
                         inv.PaymentType = txtPaymentType.Text;
                         inv.PaidDate = dtpPaidDate.Value.ToString("MM/dd/yyyy");
-                    }
-                    else
-                    {
+                    } else {
                         inv.PaymentType = "";
                         inv.PaidDate = "";
                     }
@@ -110,28 +107,20 @@ namespace FaithFeed.UI
                     ClearInvoiceFields();
                     PopulateAccountStats(selectedAccount.Id);
                     MessageBox.Show("New Invoice Created!");
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Invoice information is invalid");
                 }
-            }
-            else
-            {
-                if (ValidateInvoice())
-                {
+            } else {
+                if (ValidateInvoice()) {
                     InvoiceModel inv = selectedInvoice;
                     inv.Date = InvoiceDatePicker.Value;
                     inv.InvoiceNumber = InvoiceNumberValue.Text;
                     inv.InvoiceAmount = double.Parse(InvoiceAmountValue.Text);
                     inv.IsPaid = InvoiceStatus(InvoiceStatusValue.Text);
-                    if (txtPaymentType.Visible)
-                    {
+                    if (txtPaymentType.Visible) {
                         inv.PaymentType = txtPaymentType.Text;
                         inv.PaidDate = dtpPaidDate.Value.ToString("MM/dd/yyyy");
-                    }
-                    else
-                    {
+                    } else {
                         inv.PaymentType = "";
                         inv.PaidDate = "";
                     }
@@ -142,18 +131,15 @@ namespace FaithFeed.UI
                     MessageBox.Show("Sucessfully Upated Invoice!");
                     CreateInvoiceBtn.Size = new Size(430, 68);
 
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Invoice information couldn't be validated.");
                 }
             }
         }
+        //TODO: DRY this up, and extract it from here.
         //Validation for the newly created account
-        private void Createbtn_Click(object sender, EventArgs e)
-        {
-            if (ValidateForm())
-            {
+        private void Createbtn_Click(object sender, EventArgs e) {
+            if (ValidateForm()) {
                 ChargeAccountModel model = new ChargeAccountModel(
                 0,
                 AccountNameValue.Text,
@@ -171,18 +157,14 @@ namespace FaithFeed.UI
                 ReadOnlyFields();
                 MessageBox.Show("Sucessfully created new charge account!");
                 PopulateDropDown();
-            }
-            else
-            {
+            } else {
                 MessageBox.Show("Please review and correct information.");
             }
         }
         //Validation for edited accounts.
-        private void Savebtn_Click(object sender, EventArgs e)
-        {
+        private void Savebtn_Click(object sender, EventArgs e) {
             var CurrentAccount = SelectedChargeAccount.SelectedIndex;
-            if (ValidateForm())
-            {
+            if (ValidateForm()) {
                 ChargeAccountModel model = new ChargeAccountModel(
                 selectedAccount.Id,
                 AccountNameValue.Text,
@@ -202,24 +184,18 @@ namespace FaithFeed.UI
                 PopulateFields(model.Id);
                 Savebtn.Visible = false;
                 Editbtn.Visible = true;
-            }
-            else
-            {
+            } else {
                 MessageBox.Show("Hmmm, something isn't quite right.");
             }
         }
-        private void InvoiceStatusValue_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (InvoiceStatusValue.SelectedIndex == 1)
-            {
+        private void InvoiceStatusValue_SelectedIndexChanged(object sender, EventArgs e) {
+            if (InvoiceStatusValue.SelectedIndex == 1) {
                 lblPaymentType.Visible = true;
                 lblDatePaid.Visible = true;
                 txtPaymentType.Visible = true;
                 dtpPaidDate.Text = null;
                 dtpPaidDate.Visible = true;
-            }
-            else
-            {
+            } else {
                 dtpPaidDate.Text = null;
                 txtPaymentType.Text = null;
                 lblPaymentType.Visible = false;
@@ -228,46 +204,39 @@ namespace FaithFeed.UI
                 dtpPaidDate.Visible = false;
             }
         }
-        private void monthlyInvoices_Click(object sender, EventArgs e)
-        {
-            List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
-            MonthlyReportService reportService = new MonthlyReportService();
-            foreach (int id in accountIds)
-            {
 
-                //var InvoiceDataTable = new DataTable();
-                //var InvoiceTableAdapter = new DataAdapter();
-                //InvTableAdapter.Fill(InvoiceDT, i);
-                //var AccountDT = new ChargeAccounts.ChargeAccountsDataTable();
-                //var AccTableAdapter = new Reports.ChargeAccountsTableAdapters.ChargeAccountsTableAdapter();
-                //AccTableAdapter.Fill(AccountDT, i);
-                //ReportDataSource[] sources = new ReportDataSource[]
-                //{
-                //    new ReportDataSource("Invoices", InvoiceDT),
-                //    new ReportDataSource("ChargeAccounts", AccountDT)
-                //};
-                //reportService.ProcessReport(sources, "SelectedAccountInvoice.rdlc");
+        //TODO: Get this working
+        private void monthlyInvoices_Click(object sender, EventArgs e) {
+            List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
+            ReportService reportService = new ReportService();
+            foreach (int id in accountIds) {
+                ReportDataSource[] sources = new ReportDataSource[]
+                {
+                    new ReportDataSource("Invoices", this.InvoiceDAO.GetMonthlyInvoices(id)),
+                    new ReportDataSource("ChargeAccounts", new List<ChargeAccountModel> {
+                        this.ChargeAccountDAO.GetAccountInfo(id)
+                    })
+                };
+                reportService.CreateReport(sources, "SelectedAccountInvoice.rdlc");
                 //TODO: Allow for changing of directory.
-                reportService.pdfDoc.Save($@"C:Users\{Environment.UserName}\Desktop\{DateTime.Now.Month - 1}-{DateTime.Now.Year}-Invoices.pdf");
+
             }
-            MessageBox.Show("Done Processing Monthly Invoices.\n" +
-                    "Check the desktop for the file.");
+            string folderPath = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Monthly\").FullName;
+            string fileName = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
+            string path = Path.Combine(folderPath, fileName);
+            reportService.pdfDoc.Save(path);
+            Process.Start(path);
         }
-        private void InvoiceNumberValue_TextChanged(object sender, EventArgs e)
-        {
-            if (InvoiceNumberValue.Text == "")
-            {
+        private void InvoiceNumberValue_TextChanged(object sender, EventArgs e) {
+            if (InvoiceNumberValue.Text == "") {
                 InvoiceStatusLabel.Visible = false;
                 InvoiceStatusValue.Visible = false;
-            }
-            else
-            {
+            } else {
                 InvoiceStatusLabel.Visible = true;
                 InvoiceStatusValue.Visible = true;
             }
         }
-        private void DeleteInvoiceBtn_Click(object sender, EventArgs e)
-        {
+        private void DeleteInvoiceBtn_Click(object sender, EventArgs e) {
             InvoiceDAO.DeleteInvoice(selectedInvoice.InvoiceId);
             ClearInvoiceFields();
             FillDataGrid();
@@ -277,79 +246,62 @@ namespace FaithFeed.UI
         #endregion
         #region Methods 
         //Valdiation logic for invoices
-        private bool ValidateInvoice()
-        {
+        private bool ValidateInvoice() {
             bool output = true;
-            if (InvoiceNumberValue.Text.Length == 0)
-            {
+            if (InvoiceNumberValue.Text.Length == 0) {
                 output = false;
             }
-            if (InvoiceAmountValue.Text.Length == 0)
-            {
+            if (InvoiceAmountValue.Text.Length == 0) {
                 output = false;
             }
-            if (InvoiceDatePicker.Text.Length == 0)
-            {
+            if (InvoiceDatePicker.Text.Length == 0) {
                 output = false;
             }
-            if (InvoiceStatusValue.Text.Length == 0)
-            {
+            if (InvoiceStatusValue.Text.Length == 0) {
                 output = false;
             }
             return output;
         }
         //Validation logic for account
-        private bool ValidateForm()
-        {
+        private bool ValidateForm() {
             bool output = true;
 
-            if (AccountNameValue.Text.Length == 0 || AccountNameValue.Text.Length > 20)
-            {
+            if (AccountNameValue.Text.Length == 0 || AccountNameValue.Text.Length > 20) {
                 output = false;
             }
-            if (FirstNameValue.Text.Length == 0 || FirstNameValue.Text.Length > 15)
-            {
+            if (FirstNameValue.Text.Length == 0 || FirstNameValue.Text.Length > 15) {
                 output = false;
             }
-            if (LastNameValue.Text.Length == 0 || LastNameValue.Text.Length > 20)
-            {
+            if (LastNameValue.Text.Length == 0 || LastNameValue.Text.Length > 20) {
                 output = false;
             }
-            if (AccountNameValue.Text.Length == 0 || AddressValue.Text.Length > 40)
-            {
+            if (AccountNameValue.Text.Length == 0 || AddressValue.Text.Length > 40) {
                 output = false;
             }
-            if (CityValue.Text.Length == 0 || CityValue.Text.Length > 20)
-            {
+            if (CityValue.Text.Length == 0 || CityValue.Text.Length > 20) {
                 output = false;
             }
-            if (StateValue.Text.Length == 0 || StateValue.Text.Length > 2)
-            {
+            if (StateValue.Text.Length == 0 || StateValue.Text.Length > 2) {
                 output = false;
             }
-            if (ZipValue.Text.Length == 0 || ZipValue.Text.Length > 5)
-            {
+            if (ZipValue.Text.Length == 0 || ZipValue.Text.Length > 5) {
                 output = false;
             }
-            if (PhoneNumberValue.Text.Length == 0 || PhoneNumberValue.Text.Length > 15)
-            {
+            if (PhoneNumberValue.Text.Length == 0 || PhoneNumberValue.Text.Length > 15) {
                 output = false;
             }
             return output;
         }
-        private void InvoicesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        private void InvoicesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             var senderGrid = (DataGridView)sender;
             List<InvoiceModel> invoices = (List<InvoiceModel>)senderGrid.DataSource;
             selectedInvoice = invoices[e.RowIndex];
 
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0) {
                 InvoiceNumberValue.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[3].Value.ToString();
                 InvoiceDatePicker.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[4].Value.ToString();
                 InvoiceAmountValue.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[5].Value.ToString();
-                if (InvoicesDataGrid.Rows[e.RowIndex].Cells[6].Value.ToString() == "True")
-                {
+                if (InvoicesDataGrid.Rows[e.RowIndex].Cells[6].Value.ToString() == "True") {
                     InvoiceStatusValue.SelectedIndex = 1;
                     lblPaymentType.Visible = true;
                     lblDatePaid.Visible = true;
@@ -357,9 +309,7 @@ namespace FaithFeed.UI
                     dtpPaidDate.Visible = true;
                     txtPaymentType.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[7].Value.ToString();
                     dtpPaidDate.Text = InvoicesDataGrid.Rows[e.RowIndex].Cells[8].Value.ToString();
-                }
-                else if (InvoicesDataGrid.Rows[e.RowIndex].Cells[6].Value.ToString() == "False")
-                {
+                } else if (InvoicesDataGrid.Rows[e.RowIndex].Cells[6].Value.ToString() == "False") {
                     InvoiceStatusValue.SelectedIndex = 0;
                     dtpPaidDate.Text = "";
                     txtPaymentType.Text = "";
@@ -368,8 +318,7 @@ namespace FaithFeed.UI
                 CreateInvoiceBtn.Size = new Size(212, 68);
             }
         }
-        private void ReadOnlyFields()
-        {
+        private void ReadOnlyFields() {
             AccountNameValue.ReadOnly = true;
             FirstNameValue.ReadOnly = true;
             LastNameValue.ReadOnly = true;
@@ -380,8 +329,7 @@ namespace FaithFeed.UI
             PhoneNumberValue.ReadOnly = true;
             AdditionalNotesValue.ReadOnly = true;
         }
-        private void EditFields()
-        {
+        private void EditFields() {
             AccountNameValue.ReadOnly = false;
             FirstNameValue.ReadOnly = false;
             LastNameValue.ReadOnly = false;
@@ -392,8 +340,7 @@ namespace FaithFeed.UI
             PhoneNumberValue.ReadOnly = false;
             AdditionalNotesValue.ReadOnly = false;
         }
-        private void ClearFields()
-        {
+        private void ClearFields() {
             AccountNameValue.Text = "";
             FirstNameValue.Text = "";
             LastNameValue.Text = "";
@@ -405,11 +352,9 @@ namespace FaithFeed.UI
             AdditionalNotesValue.Text = "";
             ChargeAccountGroupBox.Text = "Charge Account Details";
         }
-        private void DisplayFields()
-        {
+        private void DisplayFields() {
 
-            if (!ChargeAccountGroupBox.Visible || !InvoicesGroupBox.Visible)
-            {
+            if (!ChargeAccountGroupBox.Visible || !InvoicesGroupBox.Visible) {
                 ChargeAccountGroupBox.Visible = true;
                 InvoicesGroupBox.Visible = true;
                 btnPrintInvoice.Visible = true;
@@ -419,8 +364,7 @@ namespace FaithFeed.UI
             PopulateFields((int)SelectedChargeAccount.SelectedValue);
             FillDataGrid();
         }
-        private void PopulateFields(int accountId)
-        {
+        private void PopulateFields(int accountId) {
 
             ChargeAccountModel account = ChargeAccountDAO.GetAccountInfo(accountId);
             selectedAccount = account;
@@ -433,22 +377,19 @@ namespace FaithFeed.UI
             ZipValue.Text = account.ZipCode;
             PhoneNumberValue.Text = account.PhoneNumber;
             AdditionalNotesValue.Text = account.AdditionalNotes;
-            if (ChargeAccountGroupBox.Text == "Charge Account Details")
-            {
+            if (ChargeAccountGroupBox.Text == "Charge Account Details") {
                 ChargeAccountGroupBox.Text += " - Id (" + account.Id + ")";
             }
             PopulateAccountStats(accountId);
         }
-        private void PopulateDropDown()
-        {
+        private void PopulateDropDown() {
             var selAcct = SelectedChargeAccount;
             selAcct.DisplayMember = "AccountName";
             selAcct.ValueMember = "Id";
             selAcct.DataSource = this.ChargeAccountDAO.GetAllAccounts();
             selAcct.SelectedIndex = -1;
         }
-        private void FillDataGrid()
-        {
+        private void FillDataGrid() {
             var idg = InvoicesDataGrid;
             var cols = idg.Columns;
             idg.ReadOnly = true;
@@ -469,27 +410,21 @@ namespace FaithFeed.UI
             cols[8].HeaderText = "Date Paid";
             cols[8].Width = 130;
         }
-        private void PopulateAccountStats(int accountId)
-        {
+        private void PopulateAccountStats(int accountId) {
             ChargeAccountStatModel accountStats = ChargeAccountDAO.GetAccountStats(accountId);
             TotalOwedLabel.Text = accountStats.TotalOwed.ToString("C2");
             MonthlySalesLabel.Text = accountStats.MonthlySales.ToString("C2");
             YTDSalesLabel.Text = accountStats.YTDSales.ToString("C2");
             AvgDayLabel.Text = accountStats.AverageDays.ToString();
         }
-        private bool InvoiceStatus(string status)
-        {
-            if (status == "Paid")
-            {
+        private bool InvoiceStatus(string status) {
+            if (status == "Paid") {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
-        private void ClearInvoiceFields()
-        {
+        private void ClearInvoiceFields() {
             InvoiceNumberValue.Text = "";
             InvoiceAmountValue.Text = "";
             InvoiceDatePicker.ResetText();
