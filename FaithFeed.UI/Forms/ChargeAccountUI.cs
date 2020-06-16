@@ -19,6 +19,7 @@ using System.Data.Common;
 using Microsoft.Reporting.WinForms;
 using System.IO;
 using System.Diagnostics;
+using PdfSharp.Pdf;
 
 namespace FaithFeed.UI {
 
@@ -66,7 +67,6 @@ namespace FaithFeed.UI {
             if (selectedAccount.Id == 0) {
                 MessageBox.Show("You must select an account first.");
             } else {
-                var reportService = new ReportService();
                 ReportDataSource[] sources = new ReportDataSource[]
                 {
                     new ReportDataSource("Invoices", this.InvoiceDAO.GetMonthlyInvoices(selectedAccount.Id)),
@@ -74,13 +74,9 @@ namespace FaithFeed.UI {
                         this.ChargeAccountDAO.GetAccountInfo(selectedAccount.Id)
                     })
                 };
-                reportService.CreateReport(sources, "SelectedAccountInvoice.rdlc");
-                //TODO: Allow for changing of directory.
-                string folderPath = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Accounts\{selectedAccount.AccountName}").FullName;
-                string fileName = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
-                string path = Path.Combine(folderPath, fileName);
-                reportService.pdfDoc.Save(path);
-                Process.Start(path);
+                var report = ReportService.CreateAccountInvoice(sources, "SelectedAccountInvoice.rdlc");
+                var reportPath = ReportService.SaveReport(report, selectedAccount.AccountName);
+                Process.Start(reportPath);
             }
         }
         //TODO: DRY this up, and extract it from here.
@@ -208,7 +204,7 @@ namespace FaithFeed.UI {
         //TODO: Get this working
         private void monthlyInvoices_Click(object sender, EventArgs e) {
             List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
-            ReportService reportService = new ReportService();
+            var report = new PdfDocument();
             foreach (int id in accountIds) {
                 ReportDataSource[] sources = new ReportDataSource[]
                 {
@@ -217,14 +213,9 @@ namespace FaithFeed.UI {
                         this.ChargeAccountDAO.GetAccountInfo(id)
                     })
                 };
-                reportService.CreateReport(sources, "SelectedAccountInvoice.rdlc");
-                //TODO: Allow for changing of directory.
-
+                report.AddPage(ReportService.CreateReport(sources, "SelectedAccountInvoice.rdlc"));
             }
-            string folderPath = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Monthly\").FullName;
-            string fileName = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
-            string path = Path.Combine(folderPath, fileName);
-            reportService.pdfDoc.Save(path);
+
             Process.Start(path);
         }
         private void InvoiceNumberValue_TextChanged(object sender, EventArgs e) {

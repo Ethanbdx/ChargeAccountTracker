@@ -12,10 +12,27 @@ using System.Threading.Tasks;
 
 namespace FaithFeed.Common.Business
 {
-    public class ReportService
+    public static  class ReportService
     {
-        public void CreateReport(ReportDataSource[] reportDS, string fileName)
+        public static string ReportDirectory = Path.Combine(AppContext.BaseDirectory, @"Reports\");
+        public static PdfDocument CreateAccountInvoice(ReportDataSource[] dataSources, string fileName)
         {
+            var invoice = new PdfDocument();
+            string reportPath = Path.Combine(ReportDirectory, fileName);
+            var report = RenderReport(reportPath, dataSources);
+
+            using (MemoryStream ms = new MemoryStream(report)) {
+                PdfDocument tempPDFDoc = PdfReader.Open(ms, PdfDocumentOpenMode.Import);
+                for (int i = 0; i < tempPDFDoc.PageCount; i++) {
+                    PdfPage page = tempPDFDoc.Pages[i];
+                    invoice.AddPage(page);
+                }
+            }
+            return invoice;
+        }
+
+        public static byte[] RenderReport(string reportPath, ReportDataSource[] dataSources) {
+
             var pdfDoc = new PdfDocument();
             string format = "PDF";
             string deviceInfo = "<DeviceInfo><HumanReadablePDF>True</HumanReadablePDF></DeviceInfo>";
@@ -26,26 +43,31 @@ namespace FaithFeed.Common.Business
             string[] streamIDs = null;
 
             var report = new LocalReport();
-            string reportPath = Path.Combine(AppContext.BaseDirectory, @"Reports\", fileName);
             report.ReportPath = reportPath;
 
-            if(reportDS != null)
-            {
-                foreach(ReportDataSource rds in reportDS)
-                {
+            if (dataSources != null) {
+                foreach (ReportDataSource rds in dataSources) {
                     report.DataSources.Add(rds);
                 }
             }
 
-            Byte[] pdfArray = report.Render(format, deviceInfo, out mimeType, out encoding, out extension, out streamIDs, out warnings);
+            return report.Render(format, deviceInfo, out mimeType, out encoding, out extension, out streamIDs, out warnings);
 
-            using (MemoryStream ms = new MemoryStream(pdfArray)) {
-                PdfDocument tempPDFDoc = PdfReader.Open(ms, PdfDocumentOpenMode.Import);
-                for (int i = 0; i < tempPDFDoc.PageCount; i++) {
-                    PdfPage page = tempPDFDoc.Pages[i];
-                    pdfDoc.AddPage(page);
-                }
-            }
+        }
+
+        public static string SaveReport(PdfDocument report, string accountName) {
+            string path = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Accounts\{accountName}").FullName;
+            string file = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
+            string fullPath = Path.Combine(path, file);
+            report.Save(fullPath);
+            return fullPath;
+        }
+        public static string SaveReport(PdfDocument report) {
+            string path = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Monthly").FullName;
+            string file = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
+            string fullPath = Path.Combine(path, file);
+            report.Save(fullPath);
+            return fullPath;
         }
     }
 }
