@@ -134,7 +134,8 @@ namespace FaithFeed.UI {
         //TODO: DRY this up, and extract it from here.
         //Validation for the newly created account
         private void Createbtn_Click(object sender, EventArgs e) {
-            if (ValidateForm()) {
+            if (ValidateAccount()) {
+
                 ChargeAccountModel model = new ChargeAccountModel(
                 0,
                 AccountNameValue.Text,
@@ -146,20 +147,23 @@ namespace FaithFeed.UI {
                 ZipValue.Text,
                 PhoneNumberValue.Text,
                 AdditionalNotesValue.Text);
+
                 this.ChargeAccountDAO.CreateAccount(model);
                 AccountNameValue.ReadOnly = true;
                 ClearFields();
                 ReadOnlyFields();
                 MessageBox.Show("Sucessfully created new charge account!");
                 PopulateDropDown();
+
             } else {
+
                 MessageBox.Show("Please review and correct information.");
             }
         }
         //Validation for edited accounts.
         private void Savebtn_Click(object sender, EventArgs e) {
             var CurrentAccount = SelectedChargeAccount.SelectedIndex;
-            if (ValidateForm()) {
+            if (ValidateAccount()) {
                 ChargeAccountModel model = new ChargeAccountModel(
                 selectedAccount.Id,
                 AccountNameValue.Text,
@@ -200,7 +204,6 @@ namespace FaithFeed.UI {
             }
         }
 
-        //TODO: Get this working
         private void monthlyInvoices_Click(object sender, EventArgs e) {
             List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
             var report = new PdfDocument();
@@ -254,7 +257,7 @@ namespace FaithFeed.UI {
             return output;
         }
         //Validation logic for account
-        private bool ValidateForm() {
+        private bool ValidateAccount() {
             bool output = true;
 
             if (AccountNameValue.Text.Length == 0 || AccountNameValue.Text.Length > 20) {
