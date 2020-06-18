@@ -74,8 +74,7 @@ namespace FaithFeed.UI {
                         this.ChargeAccountDAO.GetAccountInfo(selectedAccount.Id)
                     })
                 };
-                var report = ReportService.CreateAccountInvoice(sources, "SelectedAccountInvoice.rdlc");
-                var reportPath = ReportService.SaveReport(report, selectedAccount.AccountName);
+                var reportPath = ReportService.CreateAccountInvoice(sources, selectedAccount.AccountName);
                 Process.Start(reportPath);
             }
         }
@@ -205,6 +204,7 @@ namespace FaithFeed.UI {
         private void monthlyInvoices_Click(object sender, EventArgs e) {
             List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
             var report = new PdfDocument();
+            var dataSources = new List<ReportDataSource[]>();
             foreach (int id in accountIds) {
                 ReportDataSource[] sources = new ReportDataSource[]
                 {
@@ -213,10 +213,10 @@ namespace FaithFeed.UI {
                         this.ChargeAccountDAO.GetAccountInfo(id)
                     })
                 };
-                report.AddPage(ReportService.CreateReport(sources, "SelectedAccountInvoice.rdlc"));
+                dataSources.Add(sources);
             }
-
-            Process.Start(path);
+            var reportPath = ReportService.CreateMonthlyInvoices(dataSources);
+            Process.Start(reportPath);
         }
         private void InvoiceNumberValue_TextChanged(object sender, EventArgs e) {
             if (InvoiceNumberValue.Text == "") {
