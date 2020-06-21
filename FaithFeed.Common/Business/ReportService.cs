@@ -14,7 +14,7 @@ namespace FaithFeed.Common.Business
 {
     public static class ReportService
     {
-        private static string ReportDirectory = Path.Combine(AppContext.BaseDirectory, @"Reports\");
+        private static string ReportDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Reports\");
         public static string CreateAccountInvoice(ReportDataSource[] dataSources, string accountName)
         {
             string reportPath = Path.Combine(ReportDirectory, "SelectedAccountInvoice.rdlc");
@@ -72,14 +72,14 @@ namespace FaithFeed.Common.Business
         }
 
         private static string SaveReport(PdfDocument report, string accountName) {
-            string path = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Accounts\{accountName}").FullName;
+            string path = Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\Reports\Accounts\{accountName}").FullName;
             string file = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
             string fullPath = Path.Combine(path, file);
             report.Save(fullPath);
             return fullPath;
         }
         private static string SaveReport(PdfDocument report) {
-            string path = Directory.CreateDirectory($@"{Environment.CurrentDirectory}\Reports\Monthly").FullName;
+            string path = Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\Reports\Monthly").FullName;
             string file = $"{DateTime.Now.Month}-{DateTime.Now.Year}.pdf";
             string fullPath = Path.Combine(path, file);
             report.Save(fullPath);
