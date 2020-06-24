@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeed.Common", "FaithFe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaithFeed.UI", "FaithFeed.UI\FaithFeed.UI.csproj", "{62D10485-76E6-4366-8529-0DC5D24170B5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{C77EDF99-DA89-4580-B428-F34FC5D47FCB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,8 +21,6 @@ Global
 		{62D10485-76E6-4366-8529-0DC5D24170B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62D10485-76E6-4366-8529-0DC5D24170B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62D10485-76E6-4366-8529-0DC5D24170B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C77EDF99-DA89-4580-B428-F34FC5D47FCB}.Debug|Any CPU.ActiveCfg = Debug
-		{C77EDF99-DA89-4580-B428-F34FC5D47FCB}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
