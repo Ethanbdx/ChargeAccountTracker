@@ -1,25 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MaterialSkin;
 using MaterialSkin.Controls;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using FaithFeed.Common.Models;
-using FaithFeed.Common;
 using FaithFeed.Common.Business;
 using FaithFeed.Common.DAOs;
-using System.Data.Common;
 using Microsoft.Reporting.WinForms;
-using System.IO;
 using System.Diagnostics;
-using PdfSharp.Pdf;
 
 namespace FaithFeed.UI {
 
@@ -55,14 +43,14 @@ namespace FaithFeed.UI {
             Editbtn.Visible = false;
             Savebtn.Visible = true;
         }
-        //Selection changes on account name dropdown
+
         private void SelectedChargeAccount_SelectionChangeCommitted(object sender, EventArgs e) {
             ReadOnlyFields();
             Createbtn.Visible = false;
             DisplayFields();
             ClearInvoiceFields();
         }
-        //Creating an invoice from the selectedID. 
+
         public void btnPrintInvoice_Click(object sender, EventArgs e) {
             if (selectedAccount.Id == 0) {
                 MessageBox.Show("You must select an account first.");
@@ -78,8 +66,7 @@ namespace FaithFeed.UI {
                 Process.Start(reportPath);
             }
         }
-        //TODO: DRY this up, and extract it from here.
-        //Valdiation for new invoices.
+
         private void CreateInvoiceBtn_Click(object sender, EventArgs e) {
             if (CreateInvoiceBtn.Text == "Create Invoice") {
                 if (ValidateInvoice()) {
@@ -131,8 +118,7 @@ namespace FaithFeed.UI {
                 }
             }
         }
-        //TODO: DRY this up, and extract it from here.
-        //Validation for the newly created account
+
         private void Createbtn_Click(object sender, EventArgs e) {
             if (ValidateAccount()) {
 
@@ -160,7 +146,7 @@ namespace FaithFeed.UI {
                 MessageBox.Show("Please review and correct information.");
             }
         }
-        //Validation for edited accounts.
+
         private void Savebtn_Click(object sender, EventArgs e) {
             var CurrentAccount = SelectedChargeAccount.SelectedIndex;
             if (ValidateAccount()) {
@@ -206,7 +192,6 @@ namespace FaithFeed.UI {
 
         private void monthlyInvoices_Click(object sender, EventArgs e) {
             List<int> accountIds = ChargeAccountDAO.GetMonthlyAccountsDue();
-            var report = new PdfDocument();
             var dataSources = new List<ReportDataSource[]>();
             foreach (int id in accountIds) {
                 ReportDataSource[] sources = new ReportDataSource[]
@@ -239,7 +224,6 @@ namespace FaithFeed.UI {
         }
         #endregion
         #region Methods 
-        //Valdiation logic for invoices
         private bool ValidateInvoice() {
             bool output = true;
             if (InvoiceNumberValue.Text.Length == 0) {
@@ -256,7 +240,7 @@ namespace FaithFeed.UI {
             }
             return output;
         }
-        //Validation logic for account
+
         private bool ValidateAccount() {
             bool output = true;
 

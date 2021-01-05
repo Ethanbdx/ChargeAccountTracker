@@ -3,15 +3,9 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FaithFeed.Common.Business
-{
+namespace FaithFeed.Common.Business {
     public static class ReportService
     {
         private static string ReportDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"Reports\");
@@ -38,11 +32,6 @@ namespace FaithFeed.Common.Business
 
             string format = "PDF";
             string deviceInfo = "<DeviceInfo><HumanReadablePDF>True</HumanReadablePDF></DeviceInfo>";
-            string encoding = String.Empty;
-            string mimeType = String.Empty;
-            string extension = String.Empty;
-            Warning[] warnings = null;
-            string[] streamIDs = null;
 
             var report = new LocalReport();
             report.ReportPath = reportPath;
@@ -52,7 +41,7 @@ namespace FaithFeed.Common.Business
                     report.DataSources.Add(rds);
                 }
             }
-            return report.Render(format, deviceInfo, out mimeType, out encoding, out extension, out streamIDs, out warnings);
+            return report.Render(format, deviceInfo, out _, out _, out _, out _, out _);
         }
 
         private static PdfDocument CreatePdf(byte[] reportByte) {

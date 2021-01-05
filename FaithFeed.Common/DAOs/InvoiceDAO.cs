@@ -35,7 +35,7 @@ namespace FaithFeed.Common.DAOs {
         public List<InvoiceModel> GetAccountInvoices(int accountId) {
 
             using(IDbConnection connection = new SqlConnection(ConnectionString)) {
-                return connection.Query<InvoiceModel>("dbo.spGetInvoices", new { accountId = accountId }, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<InvoiceModel>("dbo.spGetInvoices", new { accountId = accountId }, commandType: CommandType.StoredProcedure).OrderBy(x => x.IsPaid).ToList();
             }
         }
 
