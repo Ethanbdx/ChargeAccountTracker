@@ -10,6 +10,6 @@ namespace FaithFeed.Common
 {
     public static class GlobalConfig
     {
-        public static string CnnString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={Directory.GetCurrentDirectory()}\Database\FaithFeedSeed.mdf;Integrated Security=True";
+        public static string CnnString = $@"Data Source=localhost\SQLEXPRESS03;AttachDbFilename=E:\source\repos\ChargeAccountTracker\Database\FaithFeedSeed.mdf;Integrated Security=True";
     }  
 }
